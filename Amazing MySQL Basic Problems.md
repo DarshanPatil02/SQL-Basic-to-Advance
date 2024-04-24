@@ -35,16 +35,36 @@ CREATE TABLE EMP
 - **How do you insert values into a table?**
    - **Answer:**
 ```sql
+Syntax
 INSERT INTO table_name (column1, column2, ...)
 VALUES (value1, value2, ...);
-
-E.g.:
-
 ```
+```sql
+E.g.:
+INSERT INTO EMP VALUES (7369, 'SMITH', 'CLERK', 7902, '17-DEC-1980', 800, NULL, 20)
+
+INSERT INTO EMP VALUES (7499, 'ALLEN', 'SALESMAN', 7698, '20-FEB-1981', 1600, 300, 30)
+
+INSERT INTO EMP VALUES (7521, 'WARD', 'SALESMAN', 7698, '22-FEB-1981', 1250, 500, 30)
+
+INSERT INTO EMP VALUES (7566, 'JONES', 'MANAGER', 7839, '2-APR-1981', 2975, NULL, 20)
+```
+
 - **How do you retrieve all the columns from a table?**
    - **Answer:**
 ```sql
+Syntax
 SELECT * FROM table_name;
+
+```
+```sql
+Output: 
+EMPNO  ENAME    JOB       MGR   HIREDATE    SAL    COMM   DEPTNO
+------ -------- --------- ----- ----------- ------ ------ ------
+7369   SMITH    CLERK     7902  17-DEC-80   800           20
+7499   ALLEN    SALESMAN  7698  20-FEB-81   1600   300    30
+7521   WARD     SALESMAN  7698  22-FEB-81   1250   500    30
+7566   JONES    MANAGER   7839  02-APR-81   2975          20
 
 ```
 - **How can you retrieve specific columns from a table?**
