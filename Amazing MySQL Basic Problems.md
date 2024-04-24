@@ -366,11 +366,11 @@ SELECT COUNT(*) FROM table_name;
 
 ```
 ```sql
-Synatx
+Example
 SELECT COUNT(*) as COUNT FROM students;
 
 ```
-- output
+   - **output**
 ```sql
 +----------+
 | COUNT |
