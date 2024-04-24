@@ -373,7 +373,7 @@ SELECT COUNT(*) as COUNT FROM students;
    - **output**
 ```sql
 +----------+
-| COUNT |
+| COUNT    |
 +----------+
 |       10 |
 +----------+
@@ -382,15 +382,39 @@ SELECT COUNT(*) as COUNT FROM students;
 - **How can you fetch the first 5 records from a table?**
    - **Answer:**
 ```sql
+Syntax
 SELECT * FROM table_name LIMIT 5;
+```
+```sql
+E.g.
+SELECT * FROM students LIMIT 5;
+```
+```sql
+Output
++----+--------+-----------+-----------------+-----------+
+| id |  name  | last_name |      email      | course_id |
++----+--------+-----------+-----------------+-----------+
+|  1 | Alice  |   Smith   | alice@example.com |    1      |
+|  2 | Bob    |  Johnson  | bob@example.com   |    2      |
+|  3 | Charlie|   Brown   | charlie@example.com |  1      |
+|  4 | David  |   Lee     | david@example.com |    2      |
+|  5 | Eva    |   Green   | eva@example.com   |    1      |
++----+--------+-----------+-----------------+-----------+
 
 ```
+
 - **What is the difference between `CHAR` and `VARCHAR` data types?**
    - **Answer:** `CHAR` is fixed-length while `VARCHAR` is variable-length.
 - **How can you change the data type of a column?**
    - **Answer:**
 ```sql
+Syntax
 ALTER TABLE table_name MODIFY column_name NEW_DATA_TYPE;
+
+```
+```sql
+Example:
+ALTER TABLE students MODIFY COLUMN email VARCHAR(100);
 
 ```
 - **Write a SQL query to find the 3rd highest salary from a `salaries` table.**
@@ -400,17 +424,23 @@ SELECT DISTINCT salary
 FROM salaries 
 ORDER BY salary DESC 
 LIMIT 1 OFFSET 2;
+```
+```output
++------+
+|  SAL |
++------+
+| 1250 |
++------+
 
 ```
 - **How do you create a primary key in a table?**
    - **Answer:**
 ```sql
 ALTER TABLE table_name ADD PRIMARY KEY (column_name);
-
 ```
-
-
-
+```sql
+ALTER TABLE EMP ADD PRIMARY KEY (EMPNO);
+```
 
 - **What is a foreign key constraint, and why is it used?**
    - **Answer:** A foreign key constraint establishes a link between two tables and ensures that records in one table correspond to records in another. It's used to maintain referential integrity in the database.
@@ -424,6 +454,19 @@ ALTER TABLE table_name ADD FOREIGN KEY (column_name) REFERENCES other_table(othe
    - **Answer:**
 ```sql
 SELECT DISTINCT column_name FROM table_name;
+```
+```sql
+SELECT DISTINCT sal FROM emp;
+```
+```sql
++------+
+|  SAL |
++------+
+|  800 |
+| 1600 |
+| 1250 |
+| 2975 |
++------+
 
 ```
 - **What is the difference between an `INNER JOIN` and a `LEFT JOIN`?**
@@ -443,6 +486,17 @@ SELECT DISTINCT column_name FROM table_name;
 SELECT employee_name, salary 
 FROM employees 
 WHERE salary > (SELECT AVG(salary) FROM employees);
+
+```
+```
+Output
++---------------+--------+
+| employee_name | salary |
++---------------+--------+
+| ALLEN         |   1600 |
+| WARD          |   1250 |
+| JONES         |   2975 |
++---------------+--------+
 
 ```
 - **What is a stored procedure in MySQL?**
@@ -492,7 +546,7 @@ COMMIT;
 - **How do you clone a table in MySQL?**
    - **Answer:**
 ```sql
-CREATE TABLE new_table AS SELECT * FROM existing_table;
+CREATE TABLE NEW_EMP AS SELECT * FROM EMP;
 
 ```
 - **Write a SQL query to rank employees based on their salary in descending order.**
