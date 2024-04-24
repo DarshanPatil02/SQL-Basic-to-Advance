@@ -279,9 +279,16 @@ DROP TABLE students;
 - **How would you add a new column `email` to the `students` table?**
    - **Answer:**
 ```sql
+Syntax
+ALTER TABLE table_name ADD COLUMN column_name VARCHAR(255);
+
+```
+```sql
+E.g.
 ALTER TABLE students ADD COLUMN email VARCHAR(255);
 
 ```
+
 - **What does the `DISTINCT` keyword do in a SQL query?**
    - **Answer:** It removes duplicate rows from the result set.
 - **Write a query to find the total number of distinct courses from the `enrollments` table.**
@@ -290,6 +297,14 @@ ALTER TABLE students ADD COLUMN email VARCHAR(255);
 SELECT COUNT(DISTINCT course_id) FROM enrollments;
 
 ```
+```sql
++-----------------------------+
+| COUNT(DISTINCT course_id)  |
++-----------------------------+
+|                           3 |
++-----------------------------+
+```
+
 - **What does the `EXISTS` operator do?**
    - **Answer:** It tests for the existence of any record in a subquery.
 - **Write a SQL query to find students who have enrolled in a course.**
@@ -300,6 +315,23 @@ FROM students
 WHERE EXISTS (SELECT 1 FROM enrollments WHERE students.student_id = enrollments.student_id);
 
 ```
+```sql
++------------+
+| student_id |
++------------+
+|          1 |
+|          2 |
+|          3 |
+|          4 |
+|          5 |
+|          6 |
+|          7 |
+|          8 |
+|          9 |
+|         10 |
++------------+
+```
+
 - **How can you concatenate columns in MySQL?**
    - **Answer:** Using the `CONCAT()` function.
 - **Write a query to get the full name of a student, given `first_name` and `last_name` columns.**
