@@ -120,6 +120,7 @@ EMPNO   ENAME   JOB      MGR      HIREDATE    SAL      COMM    DEPTNO
 CREATE TABLE students (
     student_id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(50),
+    last_name VARCHAR(50),
     email VARCHAR(255),
     course_id INT
 );
@@ -141,16 +142,16 @@ CREATE TABLE enrollments (
 ```sql
 INSERT INTO students (name, email, course_id)
 VALUES 
-    ('Alice', 'alice@example.com', 1),
-    ('Bob', 'bob@example.com', 2),
-    ('Charlie', 'charlie@example.com', 1),
-    ('David', 'david@example.com', 2),
-    ('Eva', 'eva@example.com', 1),
-    ('Frank', 'frank@example.com', 3),
-    ('Gina', 'gina@example.com', 3),
-    ('Harry', 'harry@example.com', 1),
-    ('Irene', 'irene@example.com', 2),
-    ('John', 'john@example.com', 3);
+    ('Alice','Smith', 'alice@example.com', 1),
+    ('Bob', 'Johnson','bob@example.com', 2),
+    ('Charlie','Brown', 'charlie@example.com', 1),
+    ('David','Lee', 'david@example.com', 2),
+    ('Eva','Green', 'eva@example.com', 1),
+    ('Frank','Miller', 'frank@example.com', 3),
+    ('Gina','Wilson', 'gina@example.com', 3),
+    ('Harry','Thompson', 'harry@example.com', 1),
+    ('Irene','Clark', 'irene@example.com', 2),
+    ('John','White', 'john@example.com', 3);
 
 INSERT INTO courses (course_name)
 VALUES 
@@ -340,12 +341,44 @@ WHERE EXISTS (SELECT 1 FROM enrollments WHERE students.student_id = enrollments.
 SELECT CONCAT(first_name, ' ', last_name) as full_name FROM students;
 
 ```
+```sql
++---------------+
+|   full_name   |
++---------------+
+| Alice Smith   |
+| Bob Johnson   |
+| Charlie Brown |
+| David Lee     |
+| Eva Green     |
+| Frank Miller  |
+| Gina Wilson   |
+| Harry Thompson|
+| Irene Clark   |
+| John White    |
++---------------+
+
+```
 - **How do you find the total number of rows in a table?**
    - **Answer:**
 ```sql
+Synatx
 SELECT COUNT(*) FROM table_name;
 
 ```
+```sql
+Synatx
+SELECT COUNT(*) as COUNT FROM students;
+
+```
+- output
+```sql
++----------+
+| COUNT |
++----------+
+|       10 |
++----------+
+```
+
 - **How can you fetch the first 5 records from a table?**
    - **Answer:**
 ```sql
