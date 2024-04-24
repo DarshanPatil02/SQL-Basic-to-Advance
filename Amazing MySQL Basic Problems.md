@@ -208,6 +208,16 @@ GROUP BY course_id
 HAVING number_of_students > 5;
 
 ```
+```sql
++-----------+---------------------+
+| course_id | number_of_students |
++-----------+---------------------+
+|         1 |                   6 |
+|         3 |                   4 |
++-----------+---------------------+
+
+```
+
 - **What is the `LIKE` operator used for?**
    - **Answer:** To search for a specified pattern in a column.
 - **Write a SQL query to find all students whose names start with 'A'.**
@@ -216,26 +226,54 @@ HAVING number_of_students > 5;
 SELECT * FROM students WHERE name LIKE 'A%';
 
 ```
+```sql
++------------+-------+-----------------+-----------+
+| student_id | name  | email           | course_id |
++------------+-------+-----------------+-----------+
+|          1 | Alice | alice@example.com |         1 |
++------------+-------+-----------------+-----------+
+
+```
+
 - **How would you update a record in a table?**
    - **Answer:**
 ```sql
+Synatx
 UPDATE table_name 
 SET column1 = value1, column2 = value2, ...
 WHERE some_column = some_value;
+```
+```sql
+E.g.
+UPDATE students 
+SET email = 'charlie_new@example.com' 
+WHERE name = 'Charlie';
 
 ```
 - **How can you delete records from a table?**
    - **Answer:**
 ```sql
+Syntax
 DELETE FROM table_name WHERE condition;
-
 ```
+
+```sql
+E.g.
+DELETE FROM students WHERE name = 'John';
+```
+
 - **How do you drop a table?**
    - **Answer:**
 ```sql
+Synatx
 DROP TABLE table_name;
-
 ```
+
+```sql
+E.g.
+DROP TABLE students;
+```
+
 - **What is the purpose of the `ALTER` table command?**
    - **Answer:** To modify an existing table structure, such as adding, deleting, or modifying columns.
 - **How would you add a new column `email` to the `students` table?**
