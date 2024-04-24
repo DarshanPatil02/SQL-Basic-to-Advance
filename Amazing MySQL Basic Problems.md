@@ -10,13 +10,15 @@ E.g.: CREATE DATABASE SQL_BASIC;
 - **How do you create a new table in MySQL?**
    - **Answer:**
 ```sql
+Syntax
 CREATE TABLE table_name (
     column1 datatype1,
     column2 datatype2,
     ...)
 ```
 
-```E.g.: 
+```sql
+Example
 CREATE TABLE EMP
    (EMPNO NUMERIC(4) NOT NULL,
    ENAME VARCHAR(10),
