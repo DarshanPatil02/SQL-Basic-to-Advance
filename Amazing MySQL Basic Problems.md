@@ -55,7 +55,10 @@ INSERT INTO EMP VALUES (7566, 'JONES', 'MANAGER', 7839, '2-APR-1981', 2975, NULL
 ```sql
 Syntax
 SELECT * FROM table_name;
-
+```
+```sql
+E.g.
+SELECT * FROM EMP;
 ```
 ```sql
 Output: 
@@ -70,18 +73,45 @@ EMPNO  ENAME    JOB       MGR   HIREDATE    SAL    COMM   DEPTNO
 - **How can you retrieve specific columns from a table?**
    - **Answer:**
 ```sql
+Syntax
 SELECT column1, column2 
 FROM table_name;
 
 ```
-- **What is the use of the WHERE clause?**
-   - **Answer:** To filter records based on specific conditions.
-- **How would you fetch data from a table where the age is greater than 25?**
-   - **Answer:**
 ```sql
-SELECT * FROM table_name WHERE age > 25;
+E.g.
+SELECT ENAME, JOB 
+FROM EMP;
 
 ```
+```sql
+Output: 
+ENAME    JOB     
+-------- ---------
+SMITH    CLERK   
+ALLEN    SALESMAN
+WARD     SALESMAN
+JONES    MANAGER 
+
+```
+
+- **What is the use of the WHERE clause?**
+   - **Answer:** To filter records based on specific conditions.
+- **How would you fetch data from a table where the salary is greater than 1250?**
+   - **Answer:**
+```sql
+SELECT * FROM EMP WHERE SAL > 1250;
+
+```
+```sql
+Output: 
+EMPNO   ENAME   JOB      MGR      HIREDATE    SAL      COMM    DEPTNO
+------- ------- -------- -------- ----------- -------- ------- ------
+7499    ALLEN   SALESMAN 7698     20-FEB-81   1600     300    30
+7566    JONES   MANAGER  7839     02-APR-81   2975            20
+
+```
+
 - **What are the different types of SQL JOINs?**
    - **Answer:** INNER JOIN, LEFT (or LEFT OUTER) JOIN, RIGHT (or RIGHT OUTER) JOIN, and FULL (or FULL OUTER) JOIN.
 - **Write a SQL query to join two tables: `students` and `courses`, assuming each student is enrolled in a course and they share a common column `course_id`.**
