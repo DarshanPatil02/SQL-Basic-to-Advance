@@ -114,6 +114,64 @@ EMPNO   ENAME   JOB      MGR      HIREDATE    SAL      COMM    DEPTNO
 
 - **What are the different types of SQL JOINs?**
    - **Answer:** INNER JOIN, LEFT (or LEFT OUTER) JOIN, RIGHT (or RIGHT OUTER) JOIN, and FULL (or FULL OUTER) JOIN.
+
+- **For Practice create some dummy tables and Insert data into it**
+```sql
+CREATE TABLE students (
+    student_id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(50),
+    email VARCHAR(255),
+    course_id INT
+);
+
+CREATE TABLE courses (
+    course_id INT AUTO_INCREMENT PRIMARY KEY,
+    course_name VARCHAR(50)
+);
+
+CREATE TABLE enrollments (
+    student_id INT,
+    course_id INT,
+    FOREIGN KEY (student_id) REFERENCES students(student_id),
+    FOREIGN KEY (course_id) REFERENCES courses(course_id)
+);
+```
+
+-**Inseting Data Into tables**
+```sql
+INSERT INTO students (name, email, course_id)
+VALUES 
+    ('Alice', 'alice@example.com', 1),
+    ('Bob', 'bob@example.com', 2),
+    ('Charlie', 'charlie@example.com', 1),
+    ('David', 'david@example.com', 2),
+    ('Eva', 'eva@example.com', 1),
+    ('Frank', 'frank@example.com', 3),
+    ('Gina', 'gina@example.com', 3),
+    ('Harry', 'harry@example.com', 1),
+    ('Irene', 'irene@example.com', 2),
+    ('John', 'john@example.com', 3);
+
+INSERT INTO courses (course_name)
+VALUES 
+    ('Math'),
+    ('Physics'),
+    ('Biology');
+
+INSERT INTO enrollments (student_id, course_id)
+VALUES 
+    (1, 1),
+    (2, 2),
+    (3, 1),
+    (4, 2),
+    (5, 1),
+    (6, 3),
+    (7, 3),
+    (8, 1),
+    (9, 2),
+    (10, 3);
+```
+
 - **Write a SQL query to join two tables: `students` and `courses`, assuming each student is enrolled in a course and they share a common column `course_id`.**
    - **Answer:**
 ```sql
@@ -122,6 +180,23 @@ INNER JOIN courses
 ON students.course_id = courses.course_id;
 
 ```
+```sql
++--------------+-------------+
+| student_name | course_name |
++--------------+-------------+
+| Alice        | Math        |
+| Bob          | Physics     |
+| Charlie      | Math        |
+| David        | Physics     |
+| Eva          | Math        |
+| Frank        | Biology     |
+| Gina         | Biology     |
+| Harry        | Math        |
+| Irene        | Physics     |
+| John         | Biology     |
++--------------+-------------+
+```
+
 - **What is the difference between the `HAVING` clause and the `WHERE` clause?**
    - **Answer:** `WHERE` filters records before aggregating in `GROUP BY`, whereas `HAVING` filters after aggregation.
 - **How would you list the number of students enrolled in each course, but only display courses with more than 5 students?**
