@@ -14,8 +14,9 @@ CREATE TABLE table_name (
     column1 datatype1,
     column2 datatype2,
     ...)
+```
 
-E.g.: 
+```E.g.: 
 CREATE TABLE EMP
    (EMPNO NUMERIC(4) NOT NULL,
    ENAME VARCHAR(10),
