@@ -544,7 +544,7 @@ After creating the stored procedure, you can call it to retrieve expensive produ
 CALL GetExpensiveProducts(150);
 ```
 ```sql
-OUtput
+Output
 The output of calling the 'GetExpensiveProducts' stored procedure with a minimum price of '150' 
 would be a result set containing the id, name, and price columns of the 'products' 
 from the 'products' table where the "price" is greater than '150'.
@@ -564,6 +564,77 @@ from the 'products' table where the "price" is greater than '150'.
    - **Answer:** Use parameterized queries or prepared statements, avoid constructing queries with string concatenation using external input, and always validate and sanitize user input.
 - **What are `TRIGGERS` in MySQL?**
    - **Answer:** Triggers are automatic actions that the database can perform when a specified change occurs (like an `INSERT`, `UPDATE`, or `DELETE` operation).
+```sql
+Sure, let's dive into an example to illustrate how triggers work in MySQL.
+
+Let's say we have a simple database with two tables: `employees` and `audit_log`. We want to create a trigger that automatically logs any changes made to the `employees` table into the `audit_log` table. We'll create an `AFTER UPDATE` trigger for this purpose.
+
+First, let's create the tables:
+
+```sql
+CREATE TABLE employees (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(100),
+    salary DECIMAL(10, 2)
+);
+
+CREATE TABLE audit_log (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    action VARCHAR(100),
+    employee_id INT,
+    old_salary DECIMAL(10, 2),
+    new_salary DECIMAL(10, 2),
+    timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+```
+
+Now, let's create the trigger:
+
+```sql
+DELIMITER //
+
+CREATE TRIGGER after_employee_update
+AFTER UPDATE ON employees
+FOR EACH ROW
+BEGIN
+    INSERT INTO audit_log (action, employee_id, old_salary, new_salary)
+    VALUES ('Employee Updated', OLD.id, OLD.salary, NEW.salary);
+END;
+//
+
+DELIMITER ;
+```
+
+In this trigger:
+
+- `after_employee_update`: This is the name of the trigger.
+- `AFTER UPDATE ON employees`: This specifies that the trigger should be fired after an update operation on the `employees` table.
+- `FOR EACH ROW`: Indicates that the trigger should be executed for each row that is affected by the update operation.
+- `BEGIN...END`: This is the body of the trigger, which contains the SQL statements to be executed when the trigger is fired.
+- `OLD.id`, `OLD.salary`, `NEW.salary`: These refer to the values of the `id` and `salary` columns before and after the update operation, respectively.
+
+Now, whenever an update is made to the `employees` table, the trigger will automatically insert a record into the `audit_log` table, capturing the action (`Employee Updated`), the `employee_id`, the old salary (`old_salary`), and the new salary (`new_salary`).
+
+For example, if we update an employee's salary:
+
+```sql
+UPDATE employees SET salary = 50000 WHERE id = 1;
+```
+
+This will trigger the `after_employee_update` trigger, and a record will be inserted into the `audit_log` table with details about the update.
+
+```sql
+SELECT * FROM audit_log;
+```
+
+Output:
+```
+| id | action           | employee_id | old_salary | new_salary | timestamp           |
+|----|------------------|-------------|------------|------------|---------------------|
+| 1  | Employee Updated | 1           | 45000.00   | 50000.00   | 2024-04-25 12:00:00 |
+``` 
+
+This record in the `audit_log` table captures the details of the update operation, including the employee ID, the old salary, and the new salary, along with a timestamp indicating when the update occurred.```
 - **Can you explain the difference between `CHAR_LENGTH` and `LENGTH` functions?**
    - **Answer:** `CHAR_LENGTH` returns the number of characters in a string, while `LENGTH` returns the number of bytes. For single-byte character sets, they return the same value.
 - **What is the purpose of the `GROUP_CONCAT` function in MySQL?**
