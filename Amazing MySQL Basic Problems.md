@@ -839,7 +839,7 @@ Output:
 | 5           | Eva           | 52000.00 | Sales           |
 ```
 ```
-In this output, we see a simplified view of employee details, including their names, salaries, and department names, provided by the `employee_details` view. 
+In this output, we see a simplified view of employee details, including their names, salaries, and department names, provided by the 'employee_details' view. 
 This allows users to query the data without needing to understand the underlying structure of the `employees` and `departments` tables.
 ```
 
