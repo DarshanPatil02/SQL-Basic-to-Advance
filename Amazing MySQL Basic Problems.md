@@ -925,7 +925,7 @@ In this output, we can see that $500 has been transferred from John's account to
 ```sql
 CREATE TABLE NEW_EMP AS SELECT * FROM EMP;
 
-```z
+```
 - **Write a SQL query to rank employees based on their salary in descending order.**
    - **Answer:**
 ```sql
