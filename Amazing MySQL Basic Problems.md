@@ -908,6 +908,7 @@ Output:
 |------------|--------------|-----------|
 | 1          | John         | 500.00    |
 | 2          | Alice        | 2500.00   |
+
 ```
 
 In this output, we can see that $500 has been transferred from John's account to Alice's account, and the balances have been updated accordingly. This demonstrates the successful execution of the transaction. If any error had occurred during the transaction, we could have rolled back the changes using the `ROLLBACK` statement to ensure data consistency.
