@@ -565,8 +565,6 @@ from the 'products' table where the "price" is greater than '150'.
 - **What are `TRIGGERS` in MySQL?**
    - **Answer:** Triggers are automatic actions that the database can perform when a specified change occurs (like an `INSERT`, `UPDATE`, or `DELETE` operation).
 ```sql
-Sure, let's dive into an example to illustrate how triggers work in MySQL.
-
 Let's say we have a simple database with two tables: `employees` and `audit_log`. We want to create a trigger that automatically logs any changes made to the `employees` table into the `audit_log` table. We'll create an `AFTER UPDATE` trigger for this purpose.
 
 First, let's create the tables:
@@ -629,14 +627,60 @@ SELECT * FROM audit_log;
 
 Output:
 ```
++----+------------------+-------------+------------+------------+---------------------+
 | id | action           | employee_id | old_salary | new_salary | timestamp           |
 |----|------------------|-------------|------------|------------|---------------------|
 | 1  | Employee Updated | 1           | 45000.00   | 50000.00   | 2024-04-25 12:00:00 |
++----+------------------+-------------+------------+------------+---------------------+
 ``` 
-
 This record in the `audit_log` table captures the details of the update operation, including the employee ID, the old salary, and the new salary, along with a timestamp indicating when the update occurred.```
+
 - **Can you explain the difference between `CHAR_LENGTH` and `LENGTH` functions?**
    - **Answer:** `CHAR_LENGTH` returns the number of characters in a string, while `LENGTH` returns the number of bytes. For single-byte character sets, they return the same value.
+```
+Let's explain the difference between `CHAR_LENGTH` and `LENGTH` functions in MySQL with an example.
+
+Suppose we have a string that contains characters from a single-byte character set (such as Latin1 or ASCII). In this case, both `CHAR_LENGTH` and `LENGTH` will return the same value because each character occupies one byte.
+
+Here's an example:
+```
+```sql
+SELECT CHAR_LENGTH('Hello') AS char_length,
+       LENGTH('Hello') AS length;
+```
+
+Output:
+```
+| char_length | length |
+|-------------|--------|
+| 5           | 5      |
+```
+
+In the above query:
+- `CHAR_LENGTH('Hello')` returns the number of characters in the string `'Hello'`, which is 5.
+- `LENGTH('Hello')` returns the number of bytes in the string `'Hello'`, which is also 5 because each character in this string occupies one byte in a single-byte character set.
+
+Now, let's consider a string that contains characters from a multi-byte character set (such as UTF-8), where characters can occupy more than one byte.
+
+```sql
+SELECT CHAR_LENGTH('😊') AS char_length,
+       LENGTH('😊') AS length;
+```
+
+Output:
+```
+| char_length | length |
+|-------------|--------|
+| 1           | 4      |
+```
+
+In this example, `'😊'` is a single emoji character. However, in UTF-8 encoding, emojis can require multiple bytes to represent. Here's the difference:
+- `CHAR_LENGTH('😊')` returns 1 because it counts the number of characters in the string, and there's only one character (the emoji).
+- `LENGTH('😊')` returns 4 because the emoji `'😊'` is represented by 4 bytes in UTF-8 encoding.
+
+So, the key difference between `CHAR_LENGTH` and `LENGTH` is how they count characters and bytes respectively, especially when dealing with multi-byte character sets. `CHAR_LENGTH` counts characters, while `LENGTH` counts bytes.
+```
+
 - **What is the purpose of the `GROUP_CONCAT` function in MySQL?**
    - **Answer:** `GROUP_CONCAT` returns a concatenated string of aggregated data values for each group of rows in the result set.
 - **Write a SQL query to concatenate all names from the `employees` table into a single string, separated by commas.**
