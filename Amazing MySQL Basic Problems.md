@@ -839,10 +839,13 @@ Output:
 | 5           | Eva           | 52000.00 | Sales           |
 ```
 ```
-In this output, we see a simplified view of employee details, including their names, salaries, and department names, provided by the `employee_details` view. This allows users to query the data without needing to understand the underlying structure of the `employees` and `departments` tables.```
+In this output, we see a simplified view of employee details, including their names, salaries, and department names, provided by the `employee_details` view. 
+This allows users to query the data without needing to understand the underlying structure of the `employees` and `departments` tables.
+```
 
 - **What are transactions in MySQL?**
    - **Answer:** Transactions are a sequence of one or more SQL operations executed as a single unit. They ensure data integrity, following the ACID properties (Atomicity, Consistency, Isolation, Durability).
+
 - **How do you start and commit a transaction in MySQL?**
    - **Answer:**
 ```sql
@@ -851,6 +854,65 @@ START TRANSACTION;
 COMMIT;
 
 ```
+
+Let's illustrate transactions in MySQL with an example involving a banking scenario. 
+We'll simulate a scenario where a transfer of funds between two accounts needs to be performed within a transaction to ensure data integrity.
+
+Suppose we have a table named `accounts` with the following structure:
+
+```sql
+CREATE TABLE accounts (
+    account_id INT PRIMARY KEY,
+    account_name VARCHAR(100),
+    balance DECIMAL(10, 2)
+);
+```
+
+And let's insert some sample data into the `accounts` table:
+
+```sql
+INSERT INTO accounts (account_id, account_name, balance) VALUES
+(1, 'John', 1000.00),
+(2, 'Alice', 2000.00);
+```
+
+Now, let's perform a fund transfer from account 1 (John) to account 2 (Alice) within a transaction:
+
+```sql
+START TRANSACTION;
+
+UPDATE accounts SET balance = balance - 500.00 WHERE account_id = 1;
+UPDATE accounts SET balance = balance + 500.00 WHERE account_id = 2;
+
+COMMIT;
+```
+
+In this example:
+
+- We start a transaction with the `START TRANSACTION` statement, indicating the beginning of a transaction.
+- We then execute two `UPDATE` statements within the transaction to subtract $500 from John's account (account_id = 1) and add $500 to Alice's account (account_id = 2).
+- Finally, we commit the transaction with the `COMMIT` statement, indicating that all the changes made within the transaction should be applied to the database.
+
+If the transaction is successful and no errors occur during its execution, the changes made by the transaction will be committed, 
+and the database will be updated accordingly.
+
+After committing the transaction, if we query the `accounts` table, we'll see the updated balances:
+
+```sql
+SELECT * FROM accounts;
+```
+
+Output:
+```
+| account_id | account_name | balance   |
+|------------|--------------|-----------|
+| 1          | John         | 500.00    |
+| 2          | Alice        | 2500.00   |
+```
+
+In this output, we can see that $500 has been transferred from John's account to Alice's account, and the balances have been updated accordingly. This demonstrates the successful execution of the transaction. If any error had occurred during the transaction, we could have rolled back the changes using the `ROLLBACK` statement to ensure data consistency.
+
+
 - **What is the difference between `UNION` and `UNION ALL`?**
    - **Answer:** `UNION` returns unique records from the combined dataset, while `UNION ALL` returns all records, including duplicates.
 - **What are the advantages of using stored procedures?**
