@@ -743,7 +743,7 @@ Output
 - **How can you create an index in MySQL?**
    - **Answer:**
 ```sql
-CREATE INDEX index_nazme ON table_name(column_name);
+CREATE INDEX index_name ON table_name(column_name);
 
 ```
 Sure, let's create an index on a table in MySQL with an example.
@@ -779,8 +779,68 @@ Here's an example of the output:
 In the output, you'll see the `Key_name` column containing the name of the index (`index_department`), and the `Column_name` column showing the indexed column (`department`). This confirms that the index has been successfully created on the `department` column of the `employees` table.
 - **What is the difference between a clustered and a non-clustered index?**
    - **Answer:** A clustered index determines the physical order of data in a table. A table can have only one clustered index. Non-clustered indexes, on the other hand, do not determine the physical order and a table can have multiple non-clustered indexes.
+
 - **What are views in MySQL, and why are they used?**
    - **Answer:** A view is a virtual table based on the result-set of an SQL statement. They allow encapsulating complex queries, providing a simplified representation or hiding certain data.
+
+```Example```
+```sql
+CREATE TABLE departments (
+    department_id INT PRIMARY KEY,
+    department_name VARCHAR(50)
+);
+
+INSERT INTO departments (department_id, department_name) VALUES
+(1, 'Engineering'),
+(2, 'Sales'),
+(3, 'Marketing');
+
+CREATE TABLE employees (
+    employee_id INT PRIMARY KEY,
+    employee_name VARCHAR(100),
+    salary DECIMAL(10, 2),
+    department_id INT,
+    FOREIGN KEY (department_id) REFERENCES departments(department_id)
+);
+
+INSERT INTO employees (employee_id, employee_name, salary, department_id) VALUES
+(1, 'Alice', 50000.00, 1),
+(2, 'Bob', 60000.00, 2),
+(3, 'Charlie', 55000.00, 1),
+(4, 'David', 58000.00, 3),
+(5, 'Eva', 52000.00, 2);
+```
+
+Now, let's create a view `employee_details` that combines data from the `employees` and `departments` tables:
+
+```sql
+CREATE VIEW employee_details AS
+SELECT e.employee_id, e.employee_name, e.salary, d.department_name
+FROM employees e
+JOIN departments d ON e.department_id = d.department_id;
+```
+
+This view selects columns from both tables and joins them based on the `department_id` to provide a view of employee details along with their department names.
+
+Now, if we query the `employee_details` view, we'll get a simplified representation of employee information:
+
+```sql
+SELECT * FROM employee_details;
+```
+
+Output:
+```
+| employee_id | employee_name | salary   | department_name |
+|-------------|---------------|----------|-----------------|
+| 1           | Alice         | 50000.00 | Engineering     |
+| 2           | Bob           | 60000.00 | Sales           |
+| 3           | Charlie       | 55000.00 | Engineering     |
+| 4           | David         | 58000.00 | Marketing       |
+| 5           | Eva           | 52000.00 | Sales           |
+```
+```
+In this output, we see a simplified view of employee details, including their names, salaries, and department names, provided by the `employee_details` view. This allows users to query the data without needing to understand the underlying structure of the `employees` and `departments` tables.```
+
 - **What are transactions in MySQL?**
    - **Answer:** Transactions are a sequence of one or more SQL operations executed as a single unit. They ensure data integrity, following the ACID properties (Atomicity, Consistency, Isolation, Durability).
 - **How do you start and commit a transaction in MySQL?**
