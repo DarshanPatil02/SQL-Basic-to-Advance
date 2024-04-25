@@ -501,6 +501,61 @@ Output
 ```
 - **What is a stored procedure in MySQL?**
    - **Answer:** A stored procedure is a precompiled group of SQL statements stored in the database. It can be invoked as needed.
+Let's assume we have a table named 'products' with the following structure:
+
+```sql
+CREATE TABLE products (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100),
+    price DECIMAL(10, 2)
+);
+
+INSERT INTO products (name, price) VALUES ('Laptop', 800);
+INSERT INTO products (name, price) VALUES ('Smartphone', 600);
+INSERT INTO products (name, price) VALUES ('Headphones', 150);
+INSERT INTO products (name, price) VALUES ('Tablet', 300);
+INSERT INTO products (name, price) VALUES ('Smartwatch', 200);
+
+```
+Now, let's create a stored procedure named 'GetExpensiveProducts' that retrieves products with prices higher than a specified threshold:
+
+```sql
+DELIMITER //
+
+CREATE PROCEDURE GetExpensiveProducts (IN minPrice DECIMAL(10, 2))
+BEGIN
+    SELECT id, name, price
+    FROM products
+    WHERE price > minPrice;
+END //
+
+DELIMITER ;
+```
+
+In this example:
+
+The DELIMITER statement is used to change the delimiter from ; to // temporarily to allow the definition of the stored procedure with multiple SQL statements.
+The CREATE PROCEDURE statement defines the name of the procedure (GetExpensiveProducts) and specifies an input parameter (minPrice of type DECIMAL(10, 2)).
+The BEGIN and END keywords mark the beginning and end of the procedure body, respectively.
+Within the procedure body, a SELECT statement is used to retrieve products with prices higher than the specified minPrice.
+After creating the stored procedure, you can call it to retrieve expensive products:
+
+```sql
+CALL GetExpensiveProducts(150);
+```
+```sql
+OUtput
+The output of calling the 'GetExpensiveProducts' stored procedure with a minimum price of '150' would be a result set containing the id, name, and price columns of the 'products' from the 'products' table where the "price" is greater than '150'.
++----+------------+-------+
+| id | name       | price |
++----+------------+-------+
+|  1 | Laptop     | 800.00|
+|  2 | Smartphone | 600.00|
+|  4 | Tablet     | 300.00|
+|  5 | Smartwatch | 200.00|
++----+------------+-------+
+```
+
 - **How can you handle errors in stored procedures?**
    - **Answer:** In MySQL, you can use the `DECLARE` statement to define error handlers using `CONTINUE` or `EXIT` handlers.
 - **How do you prevent SQL injection in your queries?**
@@ -520,7 +575,7 @@ SELECT GROUP_CONCAT(employee_name) FROM employees;
 - **How can you create an index in MySQL?**
    - **Answer:**
 ```sql
-CREATE INDEX index_name ON table_name(column_name);
+CREATE INDEX index_nazme ON table_name(column_name);
 
 ```
 - **What is the difference between a clustered and a non-clustered index?**
@@ -548,7 +603,7 @@ COMMIT;
 ```sql
 CREATE TABLE NEW_EMP AS SELECT * FROM EMP;
 
-```
+```z
 - **Write a SQL query to rank employees based on their salary in descending order.**
    - **Answer:**
 ```sql
