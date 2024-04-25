@@ -545,7 +545,9 @@ CALL GetExpensiveProducts(150);
 ```
 ```sql
 OUtput
-The output of calling the 'GetExpensiveProducts' stored procedure with a minimum price of '150' would be a result set containing the id, name, and price columns of the 'products' from the 'products' table where the "price" is greater than '150'.
+The output of calling the 'GetExpensiveProducts' stored procedure with a minimum price of '150' 
+would be a result set containing the id, name, and price columns of the 'products' 
+from the 'products' table where the "price" is greater than '150'.
 +----+------------+-------+
 | id | name       | price |
 +----+------------+-------+
