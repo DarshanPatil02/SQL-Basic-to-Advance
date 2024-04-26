@@ -642,7 +642,8 @@ and the new salary, along with a timestamp indicating when the update occurred.`
 ```
 Let's explain the difference between `CHAR_LENGTH` and `LENGTH` functions in MySQL with an example.
 
-Suppose we have a string that contains characters from a single-byte character set (such as Latin1 or ASCII). In this case, both `CHAR_LENGTH` and `LENGTH` will return the same value because each character occupies one byte.
+Suppose we have a string that contains characters from a single-byte character set (such as Latin1 or ASCII). 
+In this case, both `CHAR_LENGTH` and `LENGTH` will return the same value because each character occupies one byte.
 
 Here's an example:
 ```
@@ -682,7 +683,6 @@ In this example, `'😊'` is a single emoji character. However, in UTF-8 encodin
 - `LENGTH('😊')` returns 4 because the emoji `'😊'` is represented by 4 bytes in UTF-8 encoding.
 
 So, the key difference between `CHAR_LENGTH` and `LENGTH` is how they count characters and bytes respectively, especially when dealing with multi-byte character sets. `CHAR_LENGTH` counts characters, while `LENGTH` counts bytes.
-```
 
 - **What is the purpose of the `GROUP_CONCAT` function in MySQL?**
    - **Answer:** `GROUP_CONCAT` returns a concatenated string of aggregated data values for each group of rows in the result set.
@@ -842,7 +842,8 @@ Output:
 ```
 In this output, we see a simplified view of employee details, including their names, salaries, and department names, 
 provided by the 'employee_details' view. 
-This allows users to query the data without needing to understand the underlying structure of the `employees` and `departments` tables.
+This allows users to query the data without needing to understand the underlying structure of the `employees` 
+and `departments` tables.
 ```
 
 - **What are transactions in MySQL?**
