@@ -996,8 +996,56 @@ With `UNION ALL`, all records from both tables are returned, including duplicate
 
 - **What are the advantages of using stored procedures?**
    - **Answer:** They provide better performance as they are precompiled, help in modular programming, offer a security mechanism, and reduce network traffic.
+
+Example:
+Suppose we have a stored procedure named `GetEmployeeDetails` that retrieves employee details based on the employee ID. Here's a simple example:
+
+```sql
+CREATE PROCEDURE GetEmployeeDetails
+    @EmployeeID INT
+AS
+BEGIN
+    SELECT * FROM Employees WHERE EmployeeID = @EmployeeID;
+END;
+```
+
+Solution:
+Let's say we want to retrieve details for employee with ID 101. We can execute the stored procedure like this:
+
+```sql
+EXEC GetEmployeeDetails @EmployeeID = 101;
+```
+
+This will return the details of the employee with ID 101 without exposing the underlying table structure or implementation details.
+
 - **What is the difference between `DATEDIFF` and `TIMESTAMPDIFF` in MySQL?**
    - **Answer:** Both are used to find the difference between two dates, but `TIMESTAMPDIFF` allows for a more specific interval, like month or year, while `DATEDIFF` returns the difference in days.
+
+1. **DATEDIFF:**
+   - `DATEDIFF` function calculates the difference between two dates in terms of days.
+   - It takes two date expressions as arguments and returns the difference in days.
+
+Example:
+Suppose we have two dates, `start_date` and `end_date`, and we want to find the difference between them in days.
+
+```sql
+SELECT DATEDIFF('2024-05-05', '2024-04-01') AS DayDifference;
+```
+
+This will return `34`, indicating that there are 34 days between May 5, 2024, and April 1, 2024.
+
+2. **TIMESTAMPDIFF:**
+   - `TIMESTAMPDIFF` function calculates the difference between two datetime or timestamp expressions.
+   - It allows for more specific intervals such as years, months, days, hours, minutes, seconds, etc.
+
+Example:
+Suppose we want to find the difference between two datetime values, `start_datetime` and `end_datetime`, in terms of months.
+
+```sql
+SELECT TIMESTAMPDIFF(MONTH, '2024-01-01', '2024-05-01') AS MonthDifference;
+```
+
+
 - **How do you clone a table in MySQL?**
    - **Answer:**
 ```sql
