@@ -635,20 +635,20 @@ Output:
 +----+------------------+-------------+------------+------------+---------------------+
 ``` 
 ```
-This record in the `audit_log` table captures the details of the update operation, including the employee ID, the old salary, 
-and the new salary, along with a timestamp indicating when the update occurred.
+This record in the `audit_log` table captures the details of the update operation, including the employee ID, 
+the old salary, and the new salary, along with a timestamp indicating when the update occurred.
 ```
 
 - **Can you explain the difference between `CHAR_LENGTH` and `LENGTH` functions?**
    - **Answer:** `CHAR_LENGTH` returns the number of characters in a string, while `LENGTH` returns the number of bytes. For single-byte character sets, they return the same value.
-```
+
 Let's explain the difference between `CHAR_LENGTH` and `LENGTH` functions in MySQL with an example.
 
 Suppose we have a string that contains characters from a single-byte character set (such as Latin1 or ASCII). 
 In this case, both `CHAR_LENGTH` and `LENGTH` will return the same value because each character occupies one byte.
 
 Here's an example:
-```
+
 ```sql
 SELECT CHAR_LENGTH('Hello') AS char_length,
        LENGTH('Hello') AS length;
@@ -922,6 +922,78 @@ In this output, we can see that $500 has been transferred from John's account to
 
 - **What is the difference between `UNION` and `UNION ALL`?**
    - **Answer:** `UNION` returns unique records from the combined dataset, while `UNION ALL` returns all records, including duplicates.
+
+Let's say we have two tables, `table1` and `table2`, with the following data:
+
+```
+table1
++----+--------+
+| ID | Value  |
++----+--------+
+| 1  | Apple  |
+| 2  | Banana |
+| 3  | Orange |
++----+--------+
+
+table2
++----+--------+
+| ID | Value  |
++----+--------+
+| 3  | Orange |
+| 4  | Mango  |
+| 5  | Apple  |
++----+--------+
+```
+
+If we use `UNION`:
+
+```sql
+SELECT * FROM table1
+UNION
+SELECT * FROM table2;
+```
+
+The result would be:
+
+```
++----+--------+
+| ID | Value  |
++----+--------+
+| 1  | Apple  |
+| 2  | Banana |
+| 3  | Orange |
+| 4  | Mango  |
+| 5  | Apple  |
++----+--------+
+```
+
+As you can see, `UNION` removes duplicates. In this case, the duplicate record with ID 3 (Orange) is removed.
+
+If we use `UNION ALL`:
+
+```sql
+SELECT * FROM table1
+UNION ALL
+SELECT * FROM table2;
+```
+
+The result would be:
+
+```
++----+--------+
+| ID | Value  |
++----+--------+
+| 1  | Apple  |
+| 2  | Banana |
+| 3  | Orange |
+| 3  | Orange |
+| 4  | Mango  |
+| 5  | Apple  |
++----+--------+
+```
+
+With `UNION ALL`, all records from both tables are returned, including duplicates. That's the main difference between `UNION` and `UNION ALL`.
+
 - **What are the advantages of using stored procedures?**
    - **Answer:** They provide better performance as they are precompiled, help in modular programming, offer a security mechanism, and reduce network traffic.
 - **What is the difference between `DATEDIFF` and `TIMESTAMPDIFF` in MySQL?**
