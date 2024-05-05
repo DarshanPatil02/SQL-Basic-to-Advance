@@ -1047,7 +1047,8 @@ SELECT TIMESTAMPDIFF(MONTH, '2024-01-01', '2024-05-01') AS MonthDifference;
 
 
 - **How do you clone a table in MySQL?**
-   - **Answer:**
+   - **Answer:** To clone a table in MySQL, you can use the CREATE TABLE statement along with a SELECT statement to copy the data from 
+   the original table into the new table.
 ```sql
 CREATE TABLE NEW_EMP AS SELECT * FROM EMP;
 
@@ -1070,12 +1071,14 @@ RENAME TABLE new_table TO original_table;
 - **What are the default storage engines in MySQL?**
    - **Answer:** The default storage engine was MyISAM up to MySQL 5.5, but InnoDB became the default from MySQL 5.5 onward.
 - **What is a self-join, and why would you use it?**
-   - **Answer:** A self-join is a join of a table to
+   - **Answer:** A self-join is a join of a table to itself.
+Here's an example of a self-join query:
 
-
-
-
-
+```sql
+SELECT e.EmployeeID, e.EmployeeName, m.EmployeeName AS ManagerName
+FROM Employees e
+JOIN Employees m ON e.ManagerID = m.EmployeeID;
+```
 
 - **What is the purpose of the `SET` data type in MySQL?**
    - **Answer:** The `SET` type is used to store a set of strings. You can store zero or more string values chosen from a list defined at table creation time.
