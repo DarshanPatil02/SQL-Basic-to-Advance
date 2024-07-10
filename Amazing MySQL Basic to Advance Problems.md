@@ -1073,7 +1073,6 @@ RENAME TABLE new_table TO original_table;
 - **What is a self-join, and why would you use it?**
    - **Answer:** A self-join is a join of a table to itself.
 Here's an example of a self-join query:
-
 ```sql
 SELECT e.EmployeeID, e.EmployeeName, m.EmployeeName AS ManagerName
 FROM Employees e
@@ -1086,7 +1085,7 @@ JOIN Employees m ON e.ManagerID = m.EmployeeID;
 CREATE TABLE t1 (colors SET('red', 'blue', 'green'));
 INSERT INTO t1 (colors) VALUES ('red,blue');
 
-```
+```s
 - **How do you implement pagination in MySQL?**
    - **Answer:** Using `LIMIT` and `OFFSET`.
 ```sql
