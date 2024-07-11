@@ -254,7 +254,7 @@ WHERE name = 'Charlie';
 - **How can you delete records from a table?**
    - **Answer:**
 ```sql
-Syntax
+Syntax 
 DELETE FROM table_name WHERE condition;
 ```
 
